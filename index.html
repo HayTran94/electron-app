@@ -6,14 +6,22 @@
 <body>
     <textarea id="input" style="width:100%;height:150px;display: block;"></textarea>
     <div style="display:flex;align-items: center;justify-content: center;">
-      <button onclick="submit()" style="width:150px;height:80px;margin:30px;align-items:center;justify-content: center;background-color: aquamarine;font-size: 20px;">Submit</button>
+      <button onclick="convertNCopy()" style="width:200px;height:50px;margin:30px;align-items:center;justify-content: center;background-color: aquamarine;font-size: 20px;">Convert and copy</button>
     </div>
-    
-    <p id="result" style="border:solid; border-width: 2px;border-color: red;">Result here</p>
+    <p>Result</p>
+    <p id="result" style="border:solid; border-width: 2px;border-color: red;min-height: 10px;" ></p>
 </body>
 <script>
-        function submit(){
-            document.getElementById("result").innerText = document.getElementById("input").value.replaceAll("\n", "\\n")
-        }
+    function convertNCopy() {
+      document.getElementById("result").innerText = document.getElementById("input").value.replaceAll("\n", "\\n")
+      var copyText = document.getElementById("result");
+      const el = document.createElement('textarea');
+      el.value = copyText.innerText;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      alert("Converted and copied to clipboard")
+  }
 </script>
 </html>
